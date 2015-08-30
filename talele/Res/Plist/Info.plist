@@ -18,13 +18,7 @@
 		<string>Icon-Small-50.png</string>
 		<string>Icon-Small.png</string>
 		<string>Icon-Small@2x.png</string>
-		<string>Default-Landscape@2x~ipad.png</string>
-		<string>Default-Portrait@2x~ipad.png</string>
-		<string>Default-Portrait~ipad.png</string>
-		<string>Default-Portrait~ipad.png</string>
-		<string>Default-Portrait~ipad.png</string>
 		<string>Icon-144.png</string>
-		<string>Default@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -38,13 +32,7 @@
 				<string>Icon-Small-50.png</string>
 				<string>Icon-Small.png</string>
 				<string>Icon-Small@2x.png</string>
-				<string>Default-Landscape@2x~ipad.png</string>
-				<string>Default-Portrait@2x~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
-				<string>Default-Portrait~ipad.png</string>
 				<string>Icon-144.png</string>
-				<string>Default@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>

@@ -2036,7 +2036,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "\"talele/Lib/kazmath/include\"";
 				INFOPLIST_FILE = "$(SRCROOT)/talele/Res/Plist/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -2065,7 +2065,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "\"talele/Lib/kazmath/include\"";
 				INFOPLIST_FILE = "$(SRCROOT)/talele/Res/Plist/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
