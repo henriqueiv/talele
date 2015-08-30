@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "GameConstants.h"
 #import "GameManager.h"
-
+#import "SmartpushManager.h"
 
 @implementation AppController
 
@@ -69,6 +69,8 @@
 	
 	[window_ setRootViewController:navController_];	
 	[window_ makeKeyAndVisible];
+    
+    [self configureSmartpushWithOptions:launchOptions];
 
 	return YES;
 }
@@ -131,5 +133,32 @@
 
 	[super dealloc];
 }
+
+#pragma-mark - Smartpush
+-(void)configureSmartpushWithOptions:(NSDictionary *)launchOptions{
+    [SmartpushManager sharedSmartpushManager];
+    SmartpushSDK *shared = [SmartpushSDK sharedInstance];
+    [shared setDelegate:self];
+    [shared didFinishLaunchingWithOptions:launchOptions];
+    [shared registerForPushNotifications];
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    [[SmartpushSDK sharedInstance] didFailToRegisterForRemoteNotificationsWithError:error];
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    [[SmartpushSDK sharedInstance] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [[SmartpushSDK sharedInstance] didReceiveRemoteNotification:userInfo];
+}
+
+// IOS 8 compatibility
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
+    [[SmartpushSDK sharedInstance] didRegisterUserNotificationSettings:notificationSettings];
+}
+
 @end
 

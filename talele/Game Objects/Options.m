@@ -10,12 +10,16 @@
 #import "GameManager.h"
 #import "GameHelper.h"
 #import "AudioHelper.h"
+#import "SmartPushManager.h"
+#define kAliasLabelPosition ccp(width/3.0f, 10.0f);
 
 @implementation Options
 
+CCLabelTTF *aliasLabel;
+
 -(void)selectLanguage:(CCMenuItemFont*)sender{
     bgLanguage.position = ccp(langMenu.position.x+sender.position.x-20,
-                          langMenu.position.y+sender.position.y);
+                              langMenu.position.y+sender.position.y);
     [eng setColor:ccBLUE];
     [pt setColor:ccBLUE];
     [es setColor:ccBLUE];
@@ -23,7 +27,7 @@
     
     [sender setColor:ccWHITE];
     NSNumber* nlang = (NSNumber*)sender.userData;
-
+    
     [GameManager sharedGameManager].language = [nlang intValue];
     [bgLanguage setScaleX:(sender.contentSize.width+40)/bgLanguage.contentSize.width];
     int language = [GameManager sharedGameManager].language;
@@ -50,7 +54,7 @@
     pt = [self createFontMenuItem:@"PORTUGUÊS" target:self selector:@selector(selectLanguage:)];
     es = [self createFontMenuItem:@"ESPAÑOL" target:self selector:@selector(selectLanguage:)];
     cn = [self createFontMenuItem:@"简体中文" target:self selector:@selector(selectLanguage:)];
-
+    
     eng.userData = [NSNumber numberWithInt:kEnglish];
     pt.userData = [NSNumber numberWithInt:kPortuguese];
     es.userData = [NSNumber numberWithInt:kSpanish];
@@ -67,7 +71,7 @@
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         langMenu.position = ccp(240, 170.0f);
     }
-
+    
     [langMenu alignItemsVerticallyWithPadding:10.0f];
     pt.position = ccp(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone? 30:100, pt.position.y);
     cn.position = ccp(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone? 30:100, cn.position.y);
@@ -85,12 +89,13 @@
     [AudioHelper playBack];
     [delegate onCloseOptions];
     [self removeFromParentAndCleanup:YES];
+    [spinner removeFromSuperview];
 }
 
 -(void)createBtnVoltar{
     btLabel = [GameHelper getLabelFontByLanguage:labelsButtonBack
-                                                    andLanguage:[GameManager sharedGameManager].language];
-
+                                     andLanguage:[GameManager sharedGameManager].language];
+    
     CCMenuItemSprite* btBack = [GameHelper createMenuItemBySprite:@"bt-voltar.png"
                                                            target:self
                                                          selector:@selector(onClickBack)];
@@ -109,13 +114,13 @@
 
 -(void)createStaticText{
     languageLabel = [CCLabelBMFont
-             labelWithString:@"."
-             fntFile:i5res(@"john.fnt")];
+                     labelWithString:@"."
+                     fntFile:i5res(@"john.fnt")];
     languageLabel.position = ccp(350,350);
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         languageLabel.position = ccp(220, 170.0f);
     }
-
+    
     languageLabel.color = ccBLACK;
     languageLabel.anchorPoint = ccp(1,0);
     [self addChild:languageLabel];
@@ -130,17 +135,65 @@
         
         return;
     }
+    
     bgLanguage.visible = languageLabel.visible = langMenu.visible = NO;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     credit = [[CCSprite alloc] initWithFile:@"credits.png"];
     credit.position = ccp(screenSize.width/2-credit.contentSize.width/6,
                           screenSize.height/2+credit.contentSize.height/5);
-
+    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         credit.position = ccp(screenSize.width/2,
-                           screenSize.height/2+credit.contentSize.height/4);
+                              screenSize.height/2+credit.contentSize.height/4);
     }
     [self addChild:credit z:100 tag:100];
+}
+
+-(void)showSmartPushAlias{
+    aliasLabel = [CCLabelTTF labelWithString:@"Alias: "
+                                    fontName:@"Verdana"
+                                    fontSize:16.0f];
+    aliasLabel.anchorPoint = CGPointZero;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    aliasLabel.position = kAliasLabelPosition
+    aliasLabel.color = ccBLACK;
+    [self addChild:aliasLabel];
+    
+    //-- Indicator view
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.color = [UIColor blackColor];
+    CGFloat height = [UIScreen mainScreen].bounds.size.height;
+    CGPoint ponto = CGPointMake(aliasLabel.position.x + aliasLabel.texture.contentSize.width + 10, height - aliasLabel.position.y - 8);
+    spinner.center = ponto;
+    spinner.hidesWhenStopped = YES;
+    spinner.transform = CGAffineTransformMakeScale(0.5, 0.5);
+    [spinner startAnimating];
+    [[[CCDirector sharedDirector] view] addSubview:spinner];
+    
+    //-- Register to listen notif
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateDeviceAlias)
+                                                 name:SmartpushSDKDeviceAddedNotification
+                                               object:nil];
+    [self updateDeviceAlias];
+}
+
+-(void)updateDeviceAlias{
+    if ([[SmartpushManager sharedSmartpushManager] hasDevice]) {
+        [spinner stopAnimating];
+        CGSize labelSize = CGSizeMake(160., 45.);
+        [aliasLabel removeFromParentAndCleanup:YES];
+        aliasLabel = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"Alias: %@", [[SmartpushManager sharedSmartpushManager] getDeviceAlias]]
+                                             dimensions:labelSize
+                                             hAlignment:kCCTextAlignmentLeft
+                                               fontName:@"Verdana"
+                                               fontSize:16.0f];
+        aliasLabel.anchorPoint = CGPointZero;
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        aliasLabel.position = kAliasLabelPosition;
+        aliasLabel.color = ccBLACK;
+        [self addChild:aliasLabel];
+    }
 }
 
 -(void)creditsAnimation{
@@ -153,7 +206,7 @@
     } else {
         creditMenu.position = ccp(creditButton.contentSize.width, creditButton.contentSize.height + 50);
     }
-
+    
     [self addChild:creditMenu z:60 tag:60];
 }
 
@@ -165,6 +218,7 @@
     [self createLanguagesMenu];
     [self createBtnVoltar];
     [self creditsAnimation];
+    [self showSmartPushAlias];
 }
 
 @end

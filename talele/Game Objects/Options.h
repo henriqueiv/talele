@@ -23,7 +23,7 @@
     NSArray* languages;
     NSArray* labelsButtonBack;
     id delegate;
-
+    UIActivityIndicatorView *spinner;
 }
 -(void) configureOptions;
 - (void)setDelegate:(id)delegate;

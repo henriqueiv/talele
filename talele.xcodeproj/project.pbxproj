@@ -324,6 +324,10 @@
 		11073E13197365D4001EDD34 /* LevelNormalLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 11073E05197365D4001EDD34 /* LevelNormalLayer.m */; };
 		11073E14197365D4001EDD34 /* PuzzleSelectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 11073E07197365D4001EDD34 /* PuzzleSelectionLayer.m */; };
 		11303CE2197367CB00748C2C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11303CE1197367CB00748C2C /* Default-568h@2x.png */; };
+		625E960D1B939227002AC061 /* SmartpushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 625E960C1B939227002AC061 /* SmartpushManager.m */; };
+		625E960F1B93948D002AC061 /* SmartpushSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E960E1B93948D002AC061 /* SmartpushSDK.framework */; };
+		625E96121B93B068002AC061 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E96101B93B068002AC061 /* AdSupport.framework */; };
+		625E96131B93B068002AC061 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625E96111B93B068002AC061 /* CoreLocation.framework */; };
 		97F9A94F15E1D3D900C17D90 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F9A94E15E1D3D900C17D90 /* QuartzCore.framework */; };
 		97F9A95115E1D3D900C17D90 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F9A95015E1D3D900C17D90 /* OpenGLES.framework */; };
 		97F9A95315E1D3D900C17D90 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F9A95215E1D3D900C17D90 /* OpenAL.framework */; };
@@ -798,6 +802,11 @@
 		11073E06197365D4001EDD34 /* PuzzleSelectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleSelectionLayer.h; sourceTree = "<group>"; };
 		11073E07197365D4001EDD34 /* PuzzleSelectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PuzzleSelectionLayer.m; sourceTree = "<group>"; };
 		11303CE1197367CB00748C2C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
+		625E960B1B939227002AC061 /* SmartpushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartpushManager.h; sourceTree = "<group>"; };
+		625E960C1B939227002AC061 /* SmartpushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartpushManager.m; sourceTree = "<group>"; };
+		625E960E1B93948D002AC061 /* SmartpushSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SmartpushSDK.framework; sourceTree = "<group>"; };
+		625E96101B93B068002AC061 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		625E96111B93B068002AC061 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		97F9A94A15E1D3D900C17D90 /* talele.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = talele.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F9A94E15E1D3D900C17D90 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		97F9A95015E1D3D900C17D90 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -821,6 +830,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				625E96121B93B068002AC061 /* AdSupport.framework in Frameworks */,
+				625E96131B93B068002AC061 /* CoreLocation.framework in Frameworks */,
 				97F9A94F15E1D3D900C17D90 /* QuartzCore.framework in Frameworks */,
 				97F9A95115E1D3D900C17D90 /* OpenGLES.framework in Frameworks */,
 				97F9A95315E1D3D900C17D90 /* OpenAL.framework in Frameworks */,
@@ -828,6 +839,7 @@
 				97F9A95715E1D3D900C17D90 /* AVFoundation.framework in Frameworks */,
 				97F9A95915E1D3D900C17D90 /* UIKit.framework in Frameworks */,
 				97F9A95B15E1D3D900C17D90 /* Foundation.framework in Frameworks */,
+				625E960F1B93948D002AC061 /* SmartpushSDK.framework in Frameworks */,
 				97F9A95D15E1D3D900C17D90 /* CoreGraphics.framework in Frameworks */,
 				97F9A95F15E1D3D900C17D90 /* GameKit.framework in Frameworks */,
 			);
@@ -1493,6 +1505,9 @@
 		97F9A94D15E1D3D900C17D90 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				625E96101B93B068002AC061 /* AdSupport.framework */,
+				625E96111B93B068002AC061 /* CoreLocation.framework */,
+				625E960E1B93948D002AC061 /* SmartpushSDK.framework */,
 				97F9A94E15E1D3D900C17D90 /* QuartzCore.framework */,
 				97F9A95015E1D3D900C17D90 /* OpenGLES.framework */,
 				97F9A95215E1D3D900C17D90 /* OpenAL.framework */,
@@ -1542,10 +1557,12 @@
 		97F9AAEF15E1D63D00C17D90 /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				97F9AAFD15E1E08000C17D90 /* GameManager.h */,
-				97F9AAFE15E1E08000C17D90 /* GameManager.m */,
 				97F9AAD815E1D3DD00C17D90 /* AppDelegate.h */,
 				97F9AAD915E1D3DD00C17D90 /* AppDelegate.m */,
+				97F9AAFD15E1E08000C17D90 /* GameManager.h */,
+				97F9AAFE15E1E08000C17D90 /* GameManager.m */,
+				625E960B1B939227002AC061 /* SmartpushManager.h */,
+				625E960C1B939227002AC061 /* SmartpushManager.m */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -1578,6 +1595,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Terra;
+				TargetAttributes = {
+					97F9A94915E1D3D900C17D90 = {
+						DevelopmentTeam = 7GGYTT3FER;
+					};
+				};
 			};
 			buildConfigurationList = 97F9A94415E1D3D900C17D90 /* Build configuration list for PBXProject "talele" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1891,6 +1913,7 @@
 				11073C0A197365A6001EDD34 /* CCMotionStreak.m in Sources */,
 				11073C3F197365A6001EDD34 /* CDOpenALSupport.m in Sources */,
 				11073C42197365A6001EDD34 /* aabb.c in Sources */,
+				625E960D1B939227002AC061 /* SmartpushManager.m in Sources */,
 				11073C4E197365A6001EDD34 /* vec2.c in Sources */,
 				11073BF0197365A6001EDD34 /* CCActionGrid3D.m in Sources */,
 				11073C33197365A6001EDD34 /* CCArray.m in Sources */,
@@ -2003,6 +2026,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = talele/Prefix.pch;
@@ -2029,6 +2056,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = talele/Prefix.pch;
 				GCC_VERSION = "";
