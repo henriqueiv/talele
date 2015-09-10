@@ -16,7 +16,6 @@
 +(SmartpushManager*)sharedSmartpushManager;
 
 -(NSString*)getDeviceAlias;
--(double)getBalance;
 -(BOOL)hasDevice;
 
 @end

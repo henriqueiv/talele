@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import "SmartpushDevice.h"
 #import "SmartpushUser.h"
+#import "SmartpushHit.h"
 
 @protocol SmartpushSDKDelegate <NSObject>
 
@@ -45,11 +46,18 @@ extern NSString * const SmartpushSDKBlockUserNotification;
 
 - (SmartpushDevice *)getDevice;
 - (SmartpushUser *)getUserInfo;
-- (void)setValue:(NSString *)value forTag:(NSString *)key;
+- (void)setValue:(NSString *)value forTag:(NSString *)key __deprecated_msg("use setString:foTag: instead.");
+
+- (void)setString:(NSString *)value forTag:(NSString *)key;
+- (void)setArray:(NSArray *)array forTag:(NSString *)key;
+- (void)setNumber:(NSNumber *)number forTag:(NSString *)key;
+- (void)setBool:(BOOL)boolean forTag:(NSString *)key;
+- (void)setTime:(NSTimeInterval)time forTag:(NSString *)key;
+
 - (void)nearestZoneWithLatitude:(double)latitude andLongitude:(double)longitude;
 - (void)blockUser:(BOOL)block;
 - (void)requestCurretUserInformation;
-
+- (void)sendHit:(SmartpushHit *)smartpushHit;
 @property (weak, nonatomic) UIResponder<SmartpushSDKDelegate> * delegate;
 
 @end
